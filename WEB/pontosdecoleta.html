@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins - Pontos de Coleta</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo">
+        </div>
+        <nav>
+            <a href="/" class="nav-btn">INÍCIO</a>
+            <a href="/solicitar" class="nav-btn">SOLICITAR COLETA</a>
+            <a href="/pontos" class="nav-btn">PONTOS DE COLETA</a>
+            <a href="/solicitacoes" class="nav-btn">MINHAS SOLICITAÇÕES</a>
+            <a href="/login" class="nav-btn">LOGIN</a>
+        </nav>
+    </header>
+
+   <main class="container">
+    <div class="banner" style="flex-direction: column; align-items: stretch; text-align: left;">
+        <h2>Pontos de Coleta em Palmas</h2>
+        <p style="color: #718096; margin-bottom: 30px; font-size: 15px;">
+            Encontre o local mais próximo para descartar seus resíduos corretamente:
+        </p>
+        
+        <div class="tabela-container">
+            <table class="tabela-coleta">
+                <thead>
+                    <tr>
+                        <th>Local</th>
+                        <th>Endereço</th>
+                        <th>Materiais Aceitos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-local">Ecoponto Sul</td>
+                        <td>Av. NS-02, Qd. 1102 Sul</td>
+                        <td><span class="tag-material">Papel</span> <span class="tag-material">Plástico</span> <span class="tag-material">Vidro</span></td>
+                    </tr>
+                    <tr>
+                        <td class="col-local">Campus Unitins</td>
+                        <td>108 Sul, Alameda 11</td>
+                        <td><span class="tag-material tag-especial">Eletroeletrônicos</span> <span class="tag-material tag-especial">Pilhas</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+    <footer class="footer">
+        <p>EcoTins | Contato: (63) 992 999 999</p>
+    </footer>
+
+</body>
+</html>

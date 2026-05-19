@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins - Minhas Solicitações</title>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo">
+        </div>
+        <nav>
+            <a href="/" class="nav-btn">INÍCIO</a>
+            <a href="/solicitar" class="nav-btn">NOVA COLETA</a>
+            <a href="/sair" class="nav-btn">SAIR</a>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert-container">
+          {% for message in messages %}
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <span class="alert-text">{{ message }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main class="container">
+        <div class="banner" style="flex-direction: column; align-items: stretch; text-align: left;">
+            <h2>Histórico de Solicitações</h2>
+            <p style="color: #718096; margin-bottom: 25px; font-size: 15px;">
+                Acompanhe abaixo o status dos seus pedidos de descarte ecológico ou cancele registros pendentes:
+            </p>
+
+            <div class="tabela-container">
+                <table class="tabela-coleta">
+    <thead>
+        <tr>
+            <th>Protocolo</th>
+            <th>Material</th>
+            <th>Descrição</th>
+            <th>Data do Pedido</th>
+            <th>Status Atual</th>
+            <th style="text-align: center;">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for solicitacao in pedidos or solicitacoes or historico %}
+        <tr>
+            <td>#{{ solicitacao['id'] }}</td>
+            <td>
+                <span class="tag-material" style="background-color: #edf2f7; color: #2d3748; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">
+                    {{ solicitacao['tipo_residuo'] }}
+                </span>
+            </td>
+            <td style="font-size: 13px; max-width: 180px; white-space: normal; word-break: break-word;">{{ solicitacao['descricao'] }}</td>
+            <td>{{ solicitacao['data_pedido'] }}</td>
+            
+            <td>
+                <div style="display: flex; flex-direction: column; gap: 4px; align-items: flex-start;">
+                    {% if solicitacao['status'] == 'Aguardando Coleta' %}
+                        <span class="status-tag status-aguardando" style="margin: 0;">{{ solicitacao['status'] }}</span>
+                        <span style="font-size: 11px; color: #a0aec0;">Aguardando triagem pelo Admin</span>
+                        
+                    {% elif solicitacao['status'] == 'Coleta Aceita' %}
+                        <span class="status-tag" style="background-color: #fef3c7; color: #d97706; font-weight: bold; margin: 0;">🤝 Coleta Aceita</span>
+                        <span style="font-size: 11px; color: #b45309; font-weight: 500;">Confirmada em: {{ solicitacao['data_hora_realizada'] }}</span>
+                        
+                    {% elif solicitacao['status'] == 'Coleta Processada' %}
+                        <span class="status-tag" style="background-color: #e0e7ff; color: #4f46e5; font-weight: bold; margin: 0;">⚙️ Coleta Processada</span>
+                        <span style="font-size: 11px; color: #4338ca; font-weight: 500;">Processada em: {{ solicitacao['data_hora_realizada'] }}</span>
+                        
+                    {% elif solicitacao['status'] == 'Coleta Agendada' %}
+                        <span class="status-tag" style="background-color: #e0f2fe; color: #0369a1; font-weight: bold; margin: 0;">📅 Coleta Agendada</span>
+                        <span style="font-size: 12px; color: #2b6cb0; font-weight: 500;">Agendada para: {{ solicitacao['data_recolhimento'] }}</span>
+                        
+                    {% elif solicitacao['status'] == 'Coleta Realizada' %}
+                        <span class="status-tag status-finalizado" style="margin: 0;">✅ Coleta Realizada</span>
+                        <span style="font-size: 12px; color: #2f855a; font-weight: bold;">Concluída em: {{ solicitacao['data_hora_realizada'] }}</span>
+
+                    {% elif solicitacao['status'] == 'Coleta Não Realizada' %}
+                        <span class="status-tag" style="background-color: #fee2e2; color: #c53030; font-weight: bold; margin: 0;">❌ Coleta Não Realizada</span>
+                        <span style="font-size: 12px; color: #c53030; font-weight: bold; margin-top: 2px; max-width: 180px; white-space: normal; word-break: break-word;">
+                            Motivo: {{ solicitacao['data_hora_realizada'] }}
+                        </span>
+                    {% else %}
+                        <span class="status-tag" style="background-color: #f1f5f9; color: #475569; margin: 0;">{{ solicitacao['status'] }}</span>
+                    {% endif %}
+                </div>
+            </td>
+
+            <td style="text-align: center; white-space: nowrap;">
+                {% if solicitacao['status'] == 'Aguardando Coleta' %}
+                    <button type="button" onclick="abrirModalEdicao('{{ solicitacao['id'] }}', '{{ solicitacao['tipo_residuo'] }}', '{{ solicitacao['descricao'] }}')" style="display: inline-block; font-size: 11px; padding: 5px 8px; background-color: #f0f5ff; color: #0050b3; border: 1px solid #adc6ff; border-radius: 4px; font-weight: bold; cursor: pointer; margin-right: 4px;">
+                        ✏️ Editar
+                    </button>
+                    
+                    <form action="/solicitacoes/excluir" method="POST" onsubmit="return confirm('Tem certeza que deseja cancelar esta solicitação?');" style="display: inline;">
+                        <input type="hidden" name="id_solicitacao" value="{{ solicitacao['id'] }}">
+                        <button type="submit" class="btn-deletar" style="font-size: 11px; padding: 5px 8px;">🗑️ Excluir</button>
+                    </form>
+                {% else %}
+                    <span style="font-size: 11px; color: #a0aec0; font-style: italic;">Bloqueado em rota</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" style="text-align: center; color: #a0aec0; padding: 20px;">Nenhuma solicitação encontrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div id="modalEditarSolicitacao" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: #ffffff; padding: 30px; border-radius: 8px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 5px; text-align: center;">Corrigir Dados da Solicitação</h3>
+        <p style="color: #718096; margin-bottom: 20px; font-size: 13px; text-align: center;">Protocolo: <strong id="txt-protocolo-modal">#</strong></p>
+        
+        <form action="/solicitacoes/editar" method="POST">
+            <input type="hidden" id="modal_id_solicitacao" name="id_solicitacao">
+            
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px;">Tipo de Resíduo</label>
+                <select id="modal_tipo" name="tipo" style="width: 100%; height: 40px; border-radius: 4px; border: 1px solid #cbd5e0; padding: 5px;" required>
+                    <option value="Eletroeletrônicos">Eletroeletrônicos</option>
+                    <option value="Pilhas/Baterias">Pilhas/Baterias</option>
+                    <option value="Papel/Papelão">Papel/Papelão</option>
+                    <option value="Plásticos">Plásticos</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px; font-size: 14px;">Descrição detalhada dos itens</label>
+                <input type="text" id="modal_descricao" name="descricao" style="width: 100%; height: 40px; border-radius: 4px; border: 1px solid #cbd5e0; padding: 10px; box-sizing: border-box;" required>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button type="button" onclick="fecharModalEdicao()" style="flex: 1; height: 40px; background: #e2e8f0; color: #4a5568; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">Cancelar</button>
+                <button type="submit" style="flex: 1; height: 40px; background: #27ae60; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirModalEdicao(id, tipo, descricao) {
+        document.getElementById('modal_id_solicitacao').value = id;
+        document.getElementById('txt-protocolo-modal').innerText = '#' + id;
+        document.getElementById('modal_tipo').value = tipo;
+        document.getElementById('modal_descricao').value = descricao;
+        document.getElementById('modalEditarSolicitacao').style.display = 'flex';
+    }
+    
+    function fecharModalEdicao() {
+        document.getElementById('modalEditarSolicitacao').style.display = 'none';
+    }
+</script>
+            </div>
+            

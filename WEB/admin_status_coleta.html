@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins Admin - Atualizar Status</title>
+</head>
+<body>
+
+    <header class="navbar" style="border-bottom: 2px solid #e53e3e;">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo">
+            <h1>Triagem de Triagem</h1>
+        </div>
+        <nav><a href="/admin" class="nav-btn">← VOLTAR AO PAINEL</a></nav>
+    </header>
+
+    <main class="container">
+        <div class="banner" style="flex-direction: column; align-items: center; text-align: left; max-width: 500px; padding: 40px 30px;">
+            <h2 style="margin-bottom: 5px; width: 100%; text-align: center;">Gerenciar Fluxo de Coleta</h2>
+            <p style="color: #718096; margin-bottom: 25px; font-size: 14px; width: 100%; text-align: center;">
+                Protocolo de Atendimento: <strong>#{{ pedido['id'] }}</strong>
+            </p>
+            
+            <form action="/admin/solicitacoes/status/{{ pedido['id'] }}" method="POST" style="width: 100%;">
+                
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="status" style="font-weight: bold; display: block; margin-bottom: 8px;">Estágio da Coleta</label>
+                    <select id="status" name="status" class="form-input-custom" onchange="alternarCamposData()" required>
+                        <option value="Aguardando Coleta" {% if pedido['status'] == 'Aguardando Coleta' %}selected{% endif %}>Aguardando Coleta</option>
+                        <option value="Coleta Aceita" {% if pedido['status'] == 'Coleta Aceita' %}selected{% endif %}>Coleta Aceita</option>
+                        <option value="Coleta Processada" {% if pedido['status'] == 'Coleta Processada' %}selected{% endif %}>Coleta Processada</option>
+                        <option value="Coleta Agendada" {% if pedido['status'] == 'Coleta Agendada' %}selected{% endif %}>Coleta Agendada (Definir Data)</option>
+                        <option value="Coleta Realizada" {% if pedido['status'] == 'Coleta Realizada' %}selected{% endif %}>Coleta Realizada (Concluído)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="grupo-agendamento" style="display: none; margin-bottom: 20px;">
+                    <label for="data_recolhimento" style="font-weight: bold; display: block; margin-bottom: 8px;">Data para Recolhimento</label>
+                    <input type="date" id="data_recolhimento" name="data_recolhimento" value="{{ pedido['data_recolhimento'] }}" class="form-input-custom" style="width:100%; height:45px; padding:10px; border-radius:6px; border:1px solid #cbd5e0;">
+                </div>
+
+                <div class="form-group" id="grupo-conclusao" style="display: none; margin-bottom: 20px;">
+                    <label for="data_hora_realizada" style="font-weight: bold; display: block; margin-bottom: 8px;">Data/Hora da Retirada (Deixe vazio para Agora)</label>
+                    <input type="text" id="data_hora_realizada" name="data_hora_realizada" value="{{ pedido['data_hora_realizada'] }}" placeholder="Ex: 17/05/2026 14:30" class="form-input-custom" style="width:100%; height:45px; padding:10px; border-radius:6px; border:1px solid #cbd5e0;">
+                </div>
+
+                <button type="submit" class="btn-login-submit" style="background-color: #27ae60; border-color: #27ae60; margin-top: 10px;">Atualizar Registro</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function alternarCamposData() {
+            var status = document.getElementById("status").value;
+            var grupoAgendamento = document.getElementById("grupo-agendamento");
+            var grupoConclusao = document.getElementById("grupo-conclusao");
+
+            // Exibe o input de data se estiver agendado ou concluído
+            if (status === "Coleta Agendada") {
+                grupoAgendamento.style.display = "block";
+                grupoConclusao.style.display = "none";
+            } else if (status === "Coleta Realizada") {
+                grupoAgendamento.style.display = "block";
+                grupoConclusao.style.display = "block";
+            } else {
+                grupoAgendamento.style.display = "none";
+                grupoConclusao.style.display = "none";
+            }
+        }
+        // Executa ao carregar a página para manter os campos certos abertos
+        window.onload = alternarCamposData;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins - Criar Conta</title>
+</head>
+<body class="login-page-body">
+
+    <div class="login-wrapper">
+        <div class="login-logo-container">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo" class="login-logo">
+        </div>
+
+        <div class="login-card">
+            <div class="login-header">
+                <h2>Criar Conta</h2>
+                <p>Cadastre-se para gerenciar suas coletas</p>
+            </div>
+
+            <form action="/cadastro" method="POST">
+                <div class="form-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+                </div>
+
+				
+				<div class="form-group">
+    <label for="telefone">Telefone / WhatsApp</label>
+    <input type="text" id="telefone" name="telefone" placeholder="(63) 99999-9999" maxlength="15" required>
+</div>
+			
+				
+				
+				<script>
+    const telInput = document.getElementById('telefone');
+    telInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        if (value.length > 6) {
+            e.target.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+        } else if (value.length > 2) {
+            e.target.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+        } else if (value.length > 0) {
+            e.target.value = `(${value}`;
+        } else {
+            e.target.value = '';
+        }
+    });
+</script>
+		
+				
+				
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Crie uma senha segura" required>
+                </div>
+
+                <button type="submit" class="btn-login-submit">Cadastrar</button>
+            </form>
+
+            <div class="login-footer">
+                <p>Já tem uma conta? <a href="/login">Fazer Login</a></p>
+                <a href="/" class="btn-back-home">← Voltar para a Home</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

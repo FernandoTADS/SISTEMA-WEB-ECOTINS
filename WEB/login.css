@@ -1,0 +1,128 @@
+/* ==========================================================================
+   ESTILO DA TELA DE LOGIN E CADASTRO - ECOTINS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px; /* Espaço amplo entre a logo e a caixa */
+    max-width: 1100px;
+    width: 100%;
+}
+
+/* Logo da esquerda */
+.login-logo {
+    max-width: 500px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Caixa do Formulário da direita */
+.login-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 380px;
+}
+
+.login-box h2 {
+    color: #000000;
+    margin-bottom: 6px;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.login-box p {
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+/* Formulário e Inputs */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #81c784;
+}
+
+/* Botão de Envio interno da caixa */
+.btn-login {
+    width: auto;
+    background-color: #e0e0e0;
+    color: black;
+    padding: 6px 18px;
+    border: 1px solid #999;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+/* Links inferiores */
+.login-footer {
+    margin-top: 20px;
+    font-size: 0.85rem;
+}
+
+.login-footer p {
+    margin-bottom: 5px;
+}
+
+.login-footer a {
+    color: #a040a0;
+    text-decoration: underline;
+}
+
+.link-voltar {
+    display: inline-block;
+    margin-top: 5px;
+    color: #a040a0;
+}
+
+/* Ajuste Responsivo para Celular */
+@media (max-width: 850px) {
+    .login-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .login-logo {
+        max-width: 80%;
+    }
+}

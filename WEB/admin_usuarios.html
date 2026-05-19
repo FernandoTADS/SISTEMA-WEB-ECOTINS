@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins Admin - Usuários</title>
+</head>
+<body>
+
+    <header class="navbar" style="border-bottom: 2px solid #e53e3e;">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo">
+            <h1>Painel Admin</h1>
+        </div>
+        <nav>
+            <a href="/admin/usuarios" class="nav-btn" style="background-color: #fee2e2; border-color: #fca5a5;">GERENCIAR USUÁRIOS</a>
+            <a href="/admin/excluidas" class="nav-btn">SOLICITAÇÕES EXCLUÍDAS</a>
+            <a href="/" class="nav-btn">VER SITE</a>
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert-container">
+          {% for message in messages %}
+            <div class="alert alert-success">
+                <span class="alert-icon">✓</span>
+                <span class="alert-text">{{ message }}</span>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <main class="container">
+        <div class="banner" style="flex-direction: column; align-items: stretch; text-align: left;">
+            <h2>Gerenciamento de Usuários Cadastrados</h2>
+            <p style="color: #718096; margin-bottom: 30px; font-size: 15px;">
+                Visualize, edite credenciais ou remova contas de acesso do EcoTins:
+            </p>
+            
+            <div class="tabela-container">
+                <table class="tabela-coleta">
+                    <thead>
+                        <tr>
+                            <th>ID Código</th>
+                            <th>Nome do Usuário</th>
+                            <th>E-mail de Acesso</th>
+                            <th style="text-align: center;">Ações Administrativas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if usuarios %}
+                            {% for user in usuarios %}
+                            <tr>
+                                <td class="col-local">#{{ user['id'] }}</td>
+                                <td><strong>{{ user['nome'] }}</strong></td>
+                                <td>{{ user['email'] }}</td>
+                                <td style="text-align: center; gap: 10px;">
+                                    <a href="/admin/usuarios/editar/{{ user['id'] }}" class="btn-editar-admin" style="text-decoration: none; margin-right: 5px;">
+                                        ✏️ Editar
+                                    </a>
+                                    
+                                    <form action="/admin/usuarios/excluir" method="POST" onsubmit="return confirm('ATENÇÃO: Excluir este usuário removerá seu acesso definitivo ao sistema. Confirmar?');" style="display: inline;">
+                                        <input type="hidden" name="id_usuario" value="{{ user['id'] }}">
+                                        <button type="submit" class="btn-deletar">
+                                            🗑️ Excluir
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #a0aec0; padding: 20px;">
+                                    Nenhum usuário cadastrado na base de dados.
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

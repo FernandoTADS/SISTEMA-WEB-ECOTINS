@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTins - Solicitar Coleta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base e Reset */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Topbar / Cabeçalho Padrão EcoTins */
+        .topbar {
+            background-color: #ffffff;
+            padding: 15px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-container img {
+            height: 50px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+
+        .nav-btn:hover {
+            background-color: #cbd5e1;
+        }
+
+        .nav-btn.ativo {
+            background-color: #27ae60;
+            color: #ffffff;
+        }
+
+        /* Área do Conteúdo Principal */
+        .main-content {
+            padding: 50px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Card do Formulário Limpo */
+        .card-solicitacao {
+            width: 100%;
+            max-width: 580px;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            border-top: 6px solid #27ae60;
+        }
+
+        h2 {
+            color: #1e293b;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .subtitulo {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Grupos do Formulário */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #334155;
+            font-size: 14px;
+        }
+
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #1e293b;
+            background-color: #ffffff;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #27ae60;
+        }
+
+        /* Inputs protegidos (Nome do usuário) */
+        .input-readonly {
+            background-color: #f1f5f9;
+            color: #64748b;
+            border-color: #e2e8f0;
+            cursor: not-allowed;
+            font-weight: 500;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Botão Principal */
+        .btn-enviar {
+            width: 100%;
+            height: 48px;
+            background-color: #27ae60;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-enviar:hover {
+            background-color: #219653;
+        }
+
+        /* Alerta de Feedback Flash */
+        .alerta-sucesso {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo-container">
+            <img src="/web/assets/logo_ecotins.png" alt="EcoTins">
+        </div>
+        <div class="nav-buttons">
+            <a href="/" class="nav-btn">INÍCIO</a>
+            <a href="/solicitar" class="nav-btn ativo">SOLICITAR COLETA</a>
+            <a href="/solicitacoes" class="nav-btn">MINHAS SOLICITAÇÕES</a>
+            <a href="/logout" class="nav-btn">SAIR</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="card-solicitacao">
+            
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alerta-sucesso">
+                            ✅ {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <h2>Solicitar Nova Coleta</h2>
+            <div class="subtitulo">Preencha os dados abaixo para agendar a retirada ecológica</div>
+            
+            <form action="/solicitar" method="POST">
+                <div class="form-group">
+                    <label>Nome do Solicitante</label>
+                    <input type="text" value="{{ user_nome }}" class="input-readonly" readonly disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="endereco">Endereço Completo para Coleta</label>
+                    <input type="text" id="endereco" name="endereco" placeholder="Ex: Av. Teotônio Segurado, Quadra 202 Sul, Lote 12" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo">Tipo de Resíduo</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="" disabled selected>Selecione o tipo de material...</option>
+                        <option value="Eletroeletrônicos">Eletroeletrônicos</option>
+                        <option value="Pilhas/Baterias">Pilhas/Baterias</option>
+                        <option value="Papel/Papelão">Papel/Papelão</option>
+                        <option value="Plásticos">Plásticos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Observações / Detalhes dos Itens</label>
+                    <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva os objetos (Ex: 1 impressora quebrada, 3 cabos HDMI)..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar">Enviar Solicitação</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

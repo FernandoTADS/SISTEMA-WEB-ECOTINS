@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins - Login</title>
+	
+
+</head>
+	<body class="login-page-body">
+
+    <div class="login-wrapper">
+        <div class="login-logo-container">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo" class="login-logo">
+        </div>
+		
+		
+        <div class="login-card">
+    <div class="login-header">
+          <h2>Entrar no Sistema</h2>
+                <p>Insira suas credenciais de acesso</p>
+    </div>
+
+   
+			{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category if category else 'success' }}">
+            <span class="alert-icon">✓</span>
+            <span class="alert-text">{{ message }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+   
+              
+            </header>
+
+            <form action="/login" method="POST" class="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                   <input type="email" id="email" name="email" value="{{ email_preenchido }}" placeholder="exemplo@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+                </div>
+
+                <button type="submit" class="btn-login-submit">Acessar Conta</button>
+            </form>
+
+            <footer class="login-footer">
+                <p>Não tem uma conta? <a href="/cadastro">Criar conta</a></p>
+                <a href="/" class="btn-back-home">← Voltar para a Home</a>
+            </footer>
+        </div>
+    </div>
+
+</body>
+</html>

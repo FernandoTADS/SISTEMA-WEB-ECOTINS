@@ -1,0 +1,721 @@
+/* ==========================================================================
+   ESTILO UNIFICADO E PROFISSIONAL (INDEX) - ECOTINS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6; /* Fundo suave unificado */
+    color: #333333;
+    line-height: 1.6;
+}
+
+/* Barra de Navegação Superior */
+.navbar { 
+    background-color: #ffffff; 
+    display: flex; 
+    align-items: center; 
+    padding: 18px 40px;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04); 
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 45px;
+    width: auto;
+}
+
+.logo h1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2d3436;
+    margin-left: 10px;
+}
+
+nav {
+    display: flex;
+    gap: 12px;
+}
+
+/* Botões do Menu */
+.nav-btn {
+    background-color: #e0e0e0;
+    color: #333333;
+    padding: 8px 20px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #d5d5d5;
+    border-color: #bbb;
+}
+
+/* Área do Conteúdo Principal */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Banner */
+.banner {
+    background-color: #ffffff; 
+    margin: 0 auto 40px auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h2 {
+    font-size: 1.8rem;
+    color: #2d3436;
+    margin-bottom: 10px;
+}
+
+.banner p {
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+.banner-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+}
+
+.banner-mobile {
+    display: none !important;
+}
+
+/* Seção de Ação Inferior */
+.action-bar {
+    margin: 40px 0;
+}
+
+.btn-main {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #333333;
+    padding: 14px 45px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    border: 1px solid #b3b3b3;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.btn-main:hover {
+    background-color: #f9f9f9;
+    border-color: #999999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Rodapé */
+.footer {
+    background-color: #ffffff;
+    color: #666666;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    font-size: 0.9rem;
+    border-top: 1px solid #eef2f1;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+/* ==========================================================================
+   CABEÇALHO PADRONIZADO ECOTINS (APLICADO EM TODAS AS PÁGINAS)
+   ========================================================================== */
+.topbar {
+    background-color: #ffffff;
+    padding: 15px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.logo-container img {
+    height: 50px;
+    display: block;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-btn {
+    background-color: #e2e8f0;
+    color: #1e293b;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: #27ae60;
+	color: #ffffff;
+}
+
+/* Destaca o botão da página atual */
+.nav-btn.ativo {
+    background-color: #27ae60;
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   Ajustes de Responsividade (Celular)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .nav-btn {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+    }
+
+    .container {
+        margin: 20px auto;
+    }
+
+    .banner {
+        padding: 15px;
+    }
+
+    .banner-desktop {
+        display: none !important;
+    }
+
+    .banner-mobile {
+        display: block !important;
+    }
+
+    .footer {
+        position: relative;
+        margin-top: 40px;
+    }
+}
+
+/* ==========================================================================
+   --- CENTRALIZAÇÃO E ESTILO DO LOGIN ---
+   ========================================================================== */
+
+/* CORREÇÃO: Força o body a se comportar como tela cheia APENAS quando a classe estiver ativa */
+body.login-page-body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    background-color: #f4f7f6;
+}
+
+/* Oculta o rodapé fixo da index na página de login para não sobrepor o card */
+body.login-page-body .footer {
+    display: none !important;
+}
+
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-logo-container {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.login-logo {
+    max-width: 280px;
+    height: auto;
+}
+
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    box-sizing: border-box;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #1e522f;
+    font-size: 26px;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.login-header p {
+    color: #718096;
+    margin: 0;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 8px;
+    font-size: 14px;
+    text-align: left;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e0;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #27ae60;
+    box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.15);
+}
+
+.btn-login-submit {
+    width: 100%;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 10px;
+    display: block;
+    box-sizing: border-box;
+    -webkit-appearance: none; 
+}
+
+.btn-login-submit:hover {
+    background-color: #219653;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.login-footer p {
+    margin: 0 0 20px 0;
+}
+
+.login-footer a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+.btn-back-home {
+    display: inline-block;
+    color: #718096;
+    font-weight: normal;
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+
+/* ==========================================================================
+   ESTILIZAÇÃO DA TABELA DE PONTOS DE COLETA
+   ========================================================================== */
+/* Container para garantir que a tabela não quebre o card branco */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 15px;
+}
+
+/* Ajustes finos na tabela para otimizar espaço */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px; /* Diminui levemente a fonte para caber tudo */
+}
+
+.table th, .table td {
+    padding: 10px 8px; /* Reduz o espaçamento interno das células */
+    text-align: left;
+    white-space: nowrap; /* Evita que o texto quebre em duas linhas desnecessariamente */
+}
+
+/* Abre uma exceção para a descrição e endereço poderem quebrar linha se forem grandes */
+.table td.col-endereco, .table td.col-descricao {
+    white-space: normal;
+    max-width: 180px; /* Limita a largura máxima para não esticar a tabela */
+}
+
+/* Container para dar acabamento arredondado e isolar a tabela */
+.tabela-container {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que os cantos arredondados cortem o fundo do th */
+    background-color: #ffffff;
+}
+
+.tabela-coleta {
+    width: 100%;
+    border-collapse: collapse; /* Une as bordas de forma limpa */
+    text-align: left;
+    font-size: 15px;
+}
+
+/* Estilo do Cabeçalho da Tabela */
+.tabela-coleta th {
+    background-color: #f8fafc; /* Cinza azulado bem suave, super moderno */
+    color: #475569; /* Tom de texto discreto e elegante */
+    font-weight: bold;
+    padding: 16px 20px; /* Espaçamento generoso para não encavalar */
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+/* Estilo das Linhas de Dados */
+.tabela-coleta td {
+    padding: 18px 20px; /* Aumenta a distância vertical entre as informações */
+    border-bottom: 1px solid #edf2f7; /* Linha fina divisória entre os pontos */
+    color: #4a5568;
+    vertical-align: middle;
+}
+
+/* Destaque sutil para a primeira coluna (Nome do Local) */
+.col-local {
+    font-weight: bold;
+    color: #1a202c !important;
+}
+
+/* Efeito ao passar o mouse para destacar a linha que está sendo lida */
+.tabela-coleta tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Pequenas pílulas (tags) para organizar os materiais aceitos */
+.tag-material {
+    display: inline-block;
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 2px 4px 2px 0;
+}
+
+/* Cor de tag alternativa para materiais eletrônicos/perigosos */
+.tag-material.tag-especial {
+    background-color: #feebc8; /* Tom amarelado suave */
+    color: #c05621;
+}
+
+
+/* ==========================================================================
+   ALERTAS E MENSAGENS DE DESTAQUE (FEEDBACK DO SISTEMA)
+   ========================================================================== */
+
+/* Container para centralizar e afastar os alertas do topo */
+.alert-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* Base da caixa de alerta */
+.alert {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    animation: slideDown 0.3s ease-out; /* Efeito de surgimento suave */
+}
+
+/* Estilo padrão de Sucesso (Fundo verde sutil, texto verde escuro) */
+.alert-success {
+    background-color: #e6f4ea; /* Verde pastel bem profissional */
+    color: #137333;            /* Verde escuro para leitura perfeita */
+    border: 1px solid #ceead6;
+}
+
+/* Ícone de check destacado */
+.alert-icon {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 12px;
+    background-color: rgba(19, 115, 51, 0.1);
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.alert-text {
+    flex: 1;
+}
+
+/* Animação para a caixa deslizar suavemente de cima para baixo */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   BOTÃO DE EXCLUSÃO DE SOLICITAÇÃO
+   ========================================================================== */
+.btn-deletar {
+    background-color: #fff1f0; /* Vermelho bem suave de fundo */
+    color: #cf1322;            /* Texto vermelho escuro profissional */
+    border: 1px solid #ffa39e;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.btn-deletar:hover {
+    background-color: #cf1322;
+    color: #ffffff;
+    border-color: #cf1322;
+    box-shadow: 0 2px 6px rgba(207, 19, 34, 0.2);
+}
+
+/* ==========================================================================
+   PAINEL DO ADMINISTRADOR (CARDS E ABAS ALTERNÁVEIS)
+   ========================================================================== */
+
+/* Grid de cartões de contagem */
+.admin-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.admin-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    text-align: center;
+    border-top: 4px solid #cbd5e0;
+}
+
+.admin-card h3 {
+    font-size: 32px;
+    margin: 0 0 5px 0;
+}
+
+.admin-card p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #718096;
+}
+
+/* Cores dinâmicas para os cards */
+.card-verde { border-top-color: #2f855a; color: #2f855a; background-color: #f0fff4; }
+.card-azul { border-top-color: #2b6cb0; color: #2b6cb0; background-color: #ebf8ff; }
+.card-vermelho { border-top-color: #c53030; color: #c53030; background-color: #fff5f5; }
+
+/* Container das Abas */
+.admin-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 2px solid #e2e8f0;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #718096;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: #2d3748;
+    background-color: #f7fafc;
+}
+
+.tab-btn.active {
+    color: #cf1322;
+    border-bottom-color: #cf1322;
+}
+
+/* Ocultação automática de conteúdo inativo */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ==========================================================================
+   BOTÃO DE EDIÇÃO ADMINISTRATIVA DO USUÁRIO
+   ========================================================================== */
+.btn-editar-admin {
+    background-color: #f0f5ff; /* Azul bem suave de fundo */
+    color: #0050b3;            /* Azul escuro legível */
+    border: 1px solid #adc6ff;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-editar-admin:hover {
+    background-color: #0050b3;
+    color: #ffffff;
+    border-color: #0050b3;
+}
+
+/* ==========================================================================
+   EXPANSÃO DO CORPO E CONTEÚDO DO PAINEL ADMIN (EVITA ESPREMER COLUNAS)
+   ========================================================================== */
+
+/* Quando a página usar a classe admin-wide, ela vai se espalhar na tela */
+.container.admin-wide {
+    max-width: 1450px !important;
+    width: 95% !important;
+    margin: 30px auto;
+}
+
+/* Força o banner interno do admin a acompanhar a largura total expandida */
+.container.admin-wide .banner {
+    max-width: 1450px !important;
+    width: 100% !important;
+}
+
+/* Ajusta o espaçamento das colunas da tabela para ficarem confortáveis */
+.table th, .table td {
+    padding: 12px 10px !important;
+    white-space: nowrap; /* Impede que dados curtos quebrem linha */
+    vertical-align: middle;
+}
+
+/* Permite que apenas o endereço quebre linha naturalmente se for muito grande */
+.table td:nth-child(4) { 
+    white-space: normal !important;
+    word-break: break-word;
+    min-width: 200px;
+}
+
+/* EFICÁCIA VISUAL: Efeito Zebra para alternar as cores das linhas */
+.table tbody tr:nth-child(even) {
+    background-color: #F2F3F2; /* Um cinza azulado bem sutil para as linhas pares */
+}
+
+.table tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* Branco puro para as linhas ímpares */
+}
+
+/* Mantém o destaque quando o mouse passa por cima da linha */
+.table tbody tr:hover {
+    background-color: #E4EED5 !important; /* Um tom ligeiramente mais escuro no hover para dar contraste */
+}

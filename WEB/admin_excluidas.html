@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins - Painel do Admin</title>
+</head>
+<body>
+
+    <header class="navbar" style="border-bottom: 2px solid #e53e3e;">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins Logo">
+            <h1>Painel Administrativo</h1>
+        </div>
+        <nav>
+            <a href="/admin/usuarios" class="nav-btn">GERENCIAR USUÁRIOS</a>
+            <a href="/admin/excluidas" class="nav-btn" style="background-color: #fee2e2; border-color: #fca5a5;">SOLICITAÇÕES EXCLUÍDAS</a>
+            <a href="/" class="nav-btn">VER SITE</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="banner" style="flex-direction: column; align-items: stretch; text-align: left;">
+            <h2>Lixeira do Sistema (Solicitações Excluídas)</h2>
+            <p style="color: #718096; margin-bottom: 30px; font-size: 15px;">
+                Histórico global de agendamentos que foram removidos pelos usuários:
+            </p>
+            
+            <div class="tabela-container">
+                <table class="tabela-coleta">
+                    <thead>
+                        <tr>
+                            <th>Protocolo Original</th>
+                            <th>ID Usuário</th>
+                            <th>Tipo de Resíduo</th>
+                            <th>Descrição do Material</th>
+                            <th>Data do Pedido</th>
+                            <th>Data de Exclusão</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if excluidos %}
+                            {% for item in excluidos %}
+                            <tr>
+                                <td class="col-local">#{{ item['id'] }}</td>
+                                <td>{{ item['usuario_id'] }}</td>
+                                <td><span class="tag-material">{{ item['tipo_residuo'] }}</span></td>
+                                <td style="font-size: 13px; max-width: 250px;">{{ item['descricao'] }}</td>
+                                <td>{{ item['data_pedido'] }}</td>
+                                <td style="color: #c53030; font-weight: bold;">{{ item['data_exclusao'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="6" style="text-align: center; color: #a0aec0; padding: 30px;">
+                                    A lixeira está vazia. Nenhuma solicitação foi excluída ainda.
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
