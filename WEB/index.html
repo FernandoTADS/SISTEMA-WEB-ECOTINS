@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>EcoTins - Home</title>
+</head>
+<body>
+    <header class="navbar">
+       <div class="logo">
+    <img src="{{ url_for('static', filename='assets/logo_ecotins.png') }}" alt="EcoTins" width="300" height="81">
+</div>
+        <nav>
+            <a href="/solicitar" class="nav-btn">SOLICITAR COLETA</a>
+            <a href="/pontos" class="nav-btn">PONTOS DE COLETA</a>
+            <a href="/solicitacoes" class="nav-btn">MINHAS SOLICITAÇÕES</a>
+            <a href="/login" class="nav-btn">LOGIN</a>
+        </nav>
+    </header>
 
+    <main class="container">
+		<section class="banner">
+    <div class="banner-content">
+        <h2>CAMPANHA</h2>
+        <p>de Recolhimento de Lixo Eletrônico e Linha Branca</p>
+        
+        <img src="{{ url_for('static', filename='assets/banner.png') }}" alt="Campanha" class="banner-img banner-desktop" width="1000">
+        
+        <img src="{{ url_for('static', filename='assets/banner_vertical.png') }}" alt="Campanha" class="banner-img banner-mobile">
+    </div>
+
+
+        <div class="action-bar" align="center">
+            <a href="/solicitar" class="btn-main" style="text-align: center">SOLICITAR COLETA</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>EcoTins | Contato: (63) 992 999 999</p>
+    </footer>
+</body>
+</html>
