@@ -42,12 +42,14 @@ SISTEMA_WEB_ECOTINS/
 │   ├── init_db.py
 │   ├── requirements.txt
 │   ├── ecotins.db
+│   ├──reset_db.py
 │
 ├── WEB/
 │   ├── admin.html
 │   ├── admin_editar_usuario.html
 │   ├── admin_excluidas.html
 │   ├── admin_usuarios.html
+│   ├── admin_status_coleta.html
 │   ├── cadastro.html
 │   ├── index.html
 │   ├── login.css
