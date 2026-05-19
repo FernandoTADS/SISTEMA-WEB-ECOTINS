@@ -42,7 +42,7 @@ SISTEMA_WEB_ECOTINS/
 │   ├── init_db.py
 │   ├── requirements.txt
 │   ├── ecotins.db
-│   ├──reset_db.py
+│   ├── reset_db.py
 │
 ├── WEB/
 │   ├── admin.html
